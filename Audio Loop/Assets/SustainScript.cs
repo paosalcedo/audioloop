@@ -7,12 +7,14 @@ public class SustainScript : MonoBehaviour {
  
 	public AudioSource sustainSource;
 	private double playSustainHere;
+	public double sustainTime;
 
 	// Use this for initialization
 	void Start () {
 		playSustainHere = 2.546734694f; //length of attack audio clip in seconds.
 		sustainSource = GetComponent<AudioSource> ();
 		sustainSource.clip = sustain;
+		sustainTime = AudioSettings.dspTime + playSustainHere;
 	}
 	
 	// Update is called once per frame
@@ -27,8 +29,7 @@ public class SustainScript : MonoBehaviour {
 
 	void PlaySustain(){
 		if (!sustainSource.isPlaying) {
-			sustainSource.PlayScheduled (AudioSettings.dspTime + playSustainHere);
-
+			sustainSource.PlayScheduled (sustainTime);
 		}
 	}
 

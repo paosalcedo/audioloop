@@ -12,6 +12,7 @@ public class AttackScript : MonoBehaviour {
 
 	public static AttackScript instance;
 	// Use this for initialization
+
 	void Start () {
 		if (instance == null) {
 			instance = this;

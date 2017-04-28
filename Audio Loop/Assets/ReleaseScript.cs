@@ -40,6 +40,7 @@ public class ReleaseScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		print ("attack length = " + attackLength);
 //		Debug.Log
 //			((timeWhenAttackWasPlayed + attackLength - timeAtKeyUp) //the time sustain was played
 //				* sampleRate /
@@ -53,16 +54,14 @@ public class ReleaseScript : MonoBehaviour {
 		positionOnAttackClip = attackSource.timeSamples;
 	
 //		timesSustainHasLooped = ((AttackScript.instance.attackTime + attackLength) / sustainLength;
-		Debug.Log ("Times has looped = " + timesSustainHasLooped);
-//		Debug.Log ("position on sustain clip: " + positionOnSustainClip);
+ //		Debug.Log ("position on sustain clip: " + positionOnSustainClip);
 
 	 
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			PlayRelease ();
    		}
 
-		Debug.Log ("attack time is " + AttackScript.instance.attackTime);
-
+ 
 	}
 
 	void PlayRelease(){
@@ -70,14 +69,14 @@ public class ReleaseScript : MonoBehaviour {
 		//TimeWhenYouPlayedAttack + LengthOfAttack + (LengthOfSustain * TimesSustainHasLooped)
 
 
-		releaseSource.PlayScheduled (
-						AttackScript.instance.attackTime + 
-			 			attackLength + //+ length of attack
-						(sustainLength * 
-						timesSustainHasLooped)
-						//times sustain has looped.
+//		releaseSource.PlayScheduled (
+//						AttackScript.instance.attackTime + 
+//			 			attackLength + //+ length of attack
+//						(sustainLength * 
+//						timesSustainHasLooped)
+//						//times sustain has looped.
 							//time
-					);
+//					);
 //		releaseSource.PlayScheduled (
 //			AttackScript.instance.attackTime + 
 // 			attackLength + //+ length of attack
@@ -102,9 +101,9 @@ public class ReleaseScript : MonoBehaviour {
 //									+ ((sustainSamples - positionOnSustainClip)/sampleRate)); //length in seconds until sustain loop completes
 //
 
-//		releaseSource.PlayScheduled (AudioSettings.dspTime + 
-//									2.546734694f +
-//									((sustainSamples - positionOnSustainClip)/sampleRate));
+		releaseSource.PlayScheduled (AudioSettings.dspTime + 
+									attackLength + sustainLength + 
+									((sustainSamples - positionOnSustainClip)/sampleRate));
 		
 //		FOR REFERENCE 
 //		releaseSource.PlayScheduled (AudioSettings.dspTime 
